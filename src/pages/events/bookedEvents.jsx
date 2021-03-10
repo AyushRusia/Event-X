@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import AuthContext from "../../context/auth";
 import CustomCard from "../../components/CustomCard";
 import Grid from "@material-ui/core/Grid";
 const fetchEvents = async () => {
@@ -31,7 +30,7 @@ const fetchEvents = async () => {
     console.log(e.response.data);
   }
 };
-const ViewEvent = () => {
+const BookedEvent = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     fetchEvents()
@@ -64,4 +63,4 @@ const ViewEvent = () => {
   );
 };
 
-export default ViewEvent;
+export default BookedEvent;

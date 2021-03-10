@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CustomCard from "../../components/CustomCard";
 import Grid from "@material-ui/core/Grid";
+import PaymentDialog from "../../components/paymentDialog";
 const fetchEvents = async () => {
   try {
     const body = `query{
@@ -32,28 +33,37 @@ const fetchEvents = async () => {
 };
 const ViewEvent = () => {
   const [data, setData] = useState([]);
+  const [dummy, setDummy] = useState();
+  const [openDialog, setOpenDialog] = useState(false);
   useEffect(() => {
     fetchEvents()
       .then((data) => {
         setData(data);
       })
       .catch((e) => console.log(e));
-  }, []);
+  }, [setData]);
 
-  console.log(data);
   return (
     <>
+      <PaymentDialog
+        openDialog={openDialog}
+        onClose={() => setOpenDialog(false)}
+        dummy={dummy}
+      />
       <Grid container spacing={1} justify="center">
-        {data.map((data) => {
+        {data.map((pata) => {
           return (
             <>
               <Grid item lg={3} justify="center">
-                <CustomCard
-                  title={data.title}
-                  description={data.description}
-                  price={data.price}
-                  _id={data._id}
-                />
+                {
+                  <CustomCard
+                    eventdata={pata}
+                    openDialog={() => {
+                      setDummy(pata);
+                      setOpenDialog(true);
+                    }}
+                  />
+                }
               </Grid>
             </>
           );

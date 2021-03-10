@@ -1,3 +1,4 @@
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
   },
 });
 const CustomCard = (props) => {
+  const { eventdata, openDialog } = props;
   const classes = useStyles();
 
   const bookEvent = async (id) => {
@@ -82,10 +84,10 @@ const CustomCard = (props) => {
                 variant="h5"
                 component="h2"
               >
-                {props.title}
+                {eventdata.title}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                {props.description}
+                {eventdata.description}
               </Typography>
               <CardActions className={classes.info}>
                 <Typography
@@ -94,7 +96,7 @@ const CustomCard = (props) => {
                   variant="h6"
                   component="h6"
                 >
-                  {props.price}
+                  {eventdata.price}
                 </Typography>
                 <Typography
                   color="secondary"
@@ -109,9 +111,7 @@ const CustomCard = (props) => {
           </CardActionArea>
           <CardActions>
             <Button
-              onClick={() => {
-                bookEvent(props._id);
-              }}
+              onClick={openDialog}
               size="small"
               color="primary"
               variant="outlined"

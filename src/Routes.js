@@ -1,10 +1,10 @@
 import { Route, Switch, Redirect } from "react-router";
 import Register from "./pages/register";
-import Event from "./pages/events/event";
+import Event from "./pages/events/createEvent";
 import Login from "./pages/login";
 import AppBar from "./components/AppBar";
 import Drawer from "./components/Drawer";
-import ViewEvent from "./pages/events/view";
+import ViewEvent from "./pages/events/viewEvents";
 import React from "react";
 import AuthContext from "./context/auth";
 
