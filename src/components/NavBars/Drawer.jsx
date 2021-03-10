@@ -18,11 +18,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Button from "@material-ui/core/Button";
-import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import axios from "axios";
-import AuthContext from "../context/auth";
-//import Register from "../pages/register";
+import AuthContext from "../../context/auth";
+import list from "./list";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
   },
   drawer: {
-    marginTop: "60px",
+    marginTop: "50px",
     display: "flex",
     flexDirection: "column",
     width: drawerWidth,
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerOpen: {
     //position: "absolute",
-    marginTop: "60px",
+    marginTop: "50px",
     display: "flex",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   drawerClose: {
     //position: "absolute",
     display: "flex",
-    marginTop: "60px",
+    marginTop: "50px",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -101,9 +101,9 @@ const useStyles = makeStyles((theme) => ({
 export default function MiniDrawer() {
   const classes = useStyles();
   const Context = useContext(AuthContext);
-  //const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
+
   async function Logout() {
     const logout = await axios.get("http://localhost:8000/auth/logout");
     console.log(logout);
@@ -161,12 +161,21 @@ export default function MiniDrawer() {
         <Divider />
 
         <List>
-          {["Create Event", "View Events", "Book Events"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
+          {list.map((object, index) => (
+            <ListItem
+              button={object.name}
+              onClick={() => {
+                history.push(object.path);
+              }}
+            >
+              <ListItemIcon
+                onClick={() => {
+                  history.push(object.path);
+                }}
+              >
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={object.name} />
             </ListItem>
           ))}
         </List>

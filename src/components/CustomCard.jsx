@@ -8,16 +8,17 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import axios from "axios";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import PinDropIcon from "@material-ui/icons/PinDrop";
 const useStyles = makeStyles({
   root: {
-    minWidth: 250,
+    minWidth: 280,
   },
   grid: {
     marginTop: "50px",
   },
   media: {
-    height: 140,
+    height: 180,
     width: 280,
   },
   title: {
@@ -26,43 +27,23 @@ const useStyles = makeStyles({
   info: {
     display: "flex",
     justifyContent: "space-around",
+    alignItems: "baseline",
+  },
+  p: {
+    margin: "auto",
+    width: 235,
+    height: 100,
+    textAlign: "justify",
+    border: "1px solid pink",
+    overflow: "auto",
   },
 });
 const CustomCard = (props) => {
   const { eventdata, openDialog } = props;
   const classes = useStyles();
-
-  const bookEvent = async (id) => {
-    try {
-      const body = `mutation{
-  createBooking(EventId:"${id}"){
-    title
-    description
-    price
-    
-  }
-}`;
-      const response = await axios.post(
-        "http://localhost:8000/graphql",
-        {
-          query: body,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log(response.data);
-    } catch (e) {
-      console.log(e.respone.data);
-    }
-  };
   return (
     <>
       <Grid
-        container
         item
         xs={10}
         lg={4}
@@ -74,7 +55,7 @@ const CustomCard = (props) => {
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image="https://via.placeholder.com/150"
+              image="https://picsum.photos/200/300"
               title="Contemplative Reptile"
             />
             <CardContent>
@@ -82,34 +63,38 @@ const CustomCard = (props) => {
                 gutterBottom
                 className={classes.title}
                 variant="h5"
-                component="h2"
+                component="h4"
               >
                 {eventdata.title}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography component="span" className={classes.info}>
+                <Typography gutterBottom variant="h6" component="span">
+                  <CalendarTodayIcon /> {eventdata.date}
+                </Typography>
+                <Typography gutterBottom variant="h6" component="span">
+                  <PinDropIcon />
+                  {eventdata.city}
+                </Typography>
+              </Typography>
+              <Typography
+                variant="body2"
+                color="secondary"
+                component="p"
+                className={classes.p}
+              >
                 {eventdata.description}
               </Typography>
-              <CardActions className={classes.info}>
-                <Typography
-                  color="secondary"
-                  gutterBottom
-                  variant="h6"
-                  component="h6"
-                >
-                  {eventdata.price}
-                </Typography>
-                <Typography
-                  color="secondary"
-                  gutterBottom
-                  variant="h6"
-                  component="h6"
-                >
-                  City
-                </Typography>
-              </CardActions>
             </CardContent>
           </CardActionArea>
-          <CardActions>
+          <CardActions className={classes.info}>
+            <Typography
+              color="primary"
+              gutterBottom
+              variant="h6"
+              component="h6"
+            >
+              {eventdata.price}
+            </Typography>
             <Button
               onClick={openDialog}
               size="small"

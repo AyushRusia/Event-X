@@ -4,9 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -24,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
-
+  const history = useHistory();
+  const location = useLocation();
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -32,11 +31,27 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Event Registration Portal
           </Typography>
-          <Button color="secondary" variant="contained" className={classes.btn}>
-            <Link to="/">Login</Link>
+          <Button
+            onClick={() => {
+              history.push("/");
+            }}
+            color="secondary"
+            variant="contained"
+            className={classes.btn}
+          >
+            {/* <Link to="/">Login</Link> */}
+            Login
           </Button>
-          <Button color="secondary" variant="contained" className={classes.btn}>
-            <Link to="/register">Register</Link>
+          <Button
+            onClick={() => {
+              history.push("/register");
+            }}
+            color="secondary"
+            variant="contained"
+            className={classes.btn}
+          >
+            {/* <Link to="/register">Register</Link> */}
+            Register
           </Button>
         </Toolbar>
       </AppBar>

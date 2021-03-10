@@ -6,10 +6,11 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
-
+import { useHistory } from "react-router-dom";
 export default function PaymentDialog(props) {
   const { openDialog, onClose, dummy } = props;
   const [pending, setPending] = React.useState(false);
+  const history = useHistory();
   //const [open, setOpen] = React.useState(false);
 
   const handleClose = () => {
@@ -65,6 +66,7 @@ export default function PaymentDialog(props) {
 
       console.log(response.data);
       handleClose();
+      history.push("/event/booked");
     } catch (e) {
       setPending(false);
       console.log(e.response.data);

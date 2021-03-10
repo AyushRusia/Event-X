@@ -1,8 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CustomCard from "../../components/CustomCard";
-import Grid from "@material-ui/core/Grid";
+import { Grid, Box, makeStyles, createStyles } from "@material-ui/core";
 import PaymentDialog from "../../components/paymentDialog";
+import Drawer from "../../components/NavBars/Drawer";
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      marginLeft: theme.spacing(8),
+      [theme.breakpoints.up("md")]: {
+        marginLeft: theme.spacing(14),
+      },
+    },
+    content: {},
+    workarea: {
+      //border: "solid 3px black",
+      marginTop: "60px",
+    },
+  })
+);
 const fetchEvents = async () => {
   try {
     const body = `query{
@@ -32,6 +48,7 @@ const fetchEvents = async () => {
   }
 };
 const ViewEvent = () => {
+  const classes = useStyles();
   const [data, setData] = useState([]);
   const [dummy, setDummy] = useState();
   const [openDialog, setOpenDialog] = useState(false);
@@ -50,25 +67,30 @@ const ViewEvent = () => {
         onClose={() => setOpenDialog(false)}
         dummy={dummy}
       />
-      <Grid container spacing={1} justify="center">
-        {data.map((pata) => {
-          return (
-            <>
-              <Grid item lg={3} justify="center">
-                {
-                  <CustomCard
-                    eventdata={pata}
-                    openDialog={() => {
-                      setDummy(pata);
-                      setOpenDialog(true);
-                    }}
-                  />
-                }
-              </Grid>
-            </>
-          );
-        })}
-      </Grid>
+      <div>
+        <Drawer />
+        <Box className={classes.root}>
+          <Grid container spacing={0} justifyContent="center">
+            {data.map((pata) => {
+              return (
+                <>
+                  <Grid item xs={9} md={5} lg={4}>
+                    {
+                      <CustomCard
+                        eventdata={pata}
+                        openDialog={() => {
+                          setDummy(pata);
+                          setOpenDialog(true);
+                        }}
+                      />
+                    }
+                  </Grid>
+                </>
+              );
+            })}
+          </Grid>
+        </Box>
+      </div>
     </>
   );
 };

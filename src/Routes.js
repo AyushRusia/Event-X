@@ -1,9 +1,7 @@
 import { Route, Switch, Redirect } from "react-router";
 import Register from "./pages/register";
-import Event from "./pages/events/createEvent";
+import CreateEvent from "./pages/events/createEvent";
 import Login from "./pages/login";
-import AppBar from "./components/AppBar";
-import Drawer from "./components/Drawer";
 import ViewEvent from "./pages/events/viewEvents";
 import React from "react";
 import AuthContext from "./context/auth";
@@ -20,7 +18,6 @@ export default function Routers() {
   console.log("executed");
   return (
     <>
-      {!context.authdata.isLoggedIn ? <AppBar /> : <Drawer />}
       <Switch>
         <Route exact path="/">
           {context.authdata.isLoggedIn ? <Redirect to="/event" /> : <Login />}
@@ -34,13 +31,20 @@ export default function Routers() {
         </Route>
         {context.authdata.isLoggedIn === true && (
           <>
-            <Route exact path="/event">
-              <ViewEvent />
-            </Route>
-
-            <Route path="/event/create">
-              <Event />
-            </Route>
+            <Switch>
+              <Route exact path="/event">
+                <ViewEvent />
+              </Route>
+              <Route exact path="/event/create">
+                <CreateEvent />
+              </Route>
+              <Route exact path="/event/booked">
+                <CreateEvent />
+              </Route>
+              <Route exact path="/event/myEvents">
+                <ViewEvent />
+              </Route>
+            </Switch>
           </>
         )}
         <Route>
