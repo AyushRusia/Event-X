@@ -2,7 +2,7 @@ import Event from "../../../models/event";
 import User from "../../../models/user";
 import Payment from "../../../models/payment";
 import bcrypt from "bcryptjs";
-import nanoid from "nanoid";
+import { nanoid } from "nanoid";
 const mutations = {
   createUser: async (Args, req) => {
     try {
@@ -55,10 +55,17 @@ const mutations = {
       const user = await User.findById(userId);
       if (!user) return new Error("User does not exist");
 
+      const check = await Payment.findOne({
+        event: Args.EventId,
+        user: userId,
+      });
+      if (check) return Error("payment already done for this event");
+      const pid = await nanoid().toString();
+      console.log(pid);
       const paymentmodel = await new Payment({
         event: Args.EventId,
         user: userId,
-        paymentId: await nanoid(),
+        paymentId: `${pid}`,
         status: "PAID",
       });
 
@@ -71,22 +78,30 @@ const mutations = {
   },
   createBooking: async (Args, req) => {
     try {
-      const user = await User.findById(req.userId);
-      const event = await Event.findById(Args.EventId);
+      const userId = req.userId;
+      const user = await User.findById(userId);
+      const event = await Event.findById(Args.BookingInput.EventId);
       if (!event) return new Error("Event does not exist");
 
+      const paymentCheck = await Payment.findOne({
+        paymentId: Args.BookingInput.paymentId,
+      });
+      if (!paymentCheck)
+        return Error("Payment not Completed try to contact host");
       const check = event.clients;
       if (check) {
         check.forEach((item) => {
           console.log(item);
-          if (item === req.userId);
-          throw Error("User already booked Event");
+          if (item === userId) throw Error("User already booked Event");
         });
       }
 
-      await event.clients.push({ client: user });
+      await event.clients.push(user);
       await event.updateOne({ clientsCount: event.clientsCount++ });
-      await user.bookedEvents.push({ event: event });
+      await user.bookedEvents.push({
+        event: event,
+        paymentId: Args.BookingInput.paymentId,
+      });
       await user.updateOne({ boookedEventsCount: user.boookedEventsCount++ });
 
       await event.save();

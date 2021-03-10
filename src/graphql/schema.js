@@ -3,7 +3,7 @@ import { buildSchema } from "graphql";
 const schema = buildSchema(`
 type bookedEvents{
     _id:ID
-    event:[Event]
+    event:Event!
     paymentId:String
     bookingTime:String
 }
@@ -19,7 +19,7 @@ type User {
     createdEventsCount:Int
     bookedEventsCount:Int
     createdEvents:[Event!]
-    bookedEvents:[Event!]!
+    bookedEvents:[bookedEvents]!
 }
 
 type Event {
@@ -39,6 +39,15 @@ type Client {
     email:String
     paymentId:ID
     bookingTime:String
+}
+type Payment{
+
+    _id:ID
+    event:ID
+    user:ID
+    paymentId:String
+    bookingTime:String
+
 }
 type RootQuery {
     getAllUser:[User!]
@@ -65,11 +74,15 @@ input UserInput{
     time:String
 
  }
-
+input BookingInput{
+    EventId:ID
+    paymentId:String
+}
  type RootMutation {
      createUser(UserInput:UserInput):User
      createEvent(EventInput:EventInput):Event
-     createBooking(EventId:String):Event
+     createOrder(EventId:ID):Payment
+     createBooking(BookingInput:BookingInput):Event
      deleteBooking(EventId:ID):Event
  }
  schema{

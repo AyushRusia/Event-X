@@ -25,6 +25,29 @@ const users = (userIds) => {
 
     .catch((e) => console.log(e));
 };
+const userbookedEvents = async (userId) => {
+  console.log(userId);
+  try {
+    const user = await User.findById(userId);
+
+    const bookedEvents = user.bookedEvents;
+    return bookedEvents.map(async (object) => {
+      const event = await Event.findById(object.event);
+      const bookingTime = object.bookingTime;
+      const paymentId = object.paymentId;
+
+      const data = {
+        _id: object._id,
+        event: event,
+        bookingTime: bookingTime,
+        paymentId: paymentId,
+      };
+      return data;
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const events = (eventIDs) => {
   return Event.find({ _id: { $in: eventIDs } })
@@ -50,5 +73,5 @@ const resolvers = {
   ...mutations,
   ...queries,
 };
-export { users, events };
+export { users, events, userbookedEvents };
 export default resolvers;

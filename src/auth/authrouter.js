@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
   try {
-    console.log(req.body);
     const {
       email,
       fname,
@@ -33,14 +32,7 @@ router.post("/register", async (req, res) => {
     });
     const data = await user.save();
 
-    const token = await jwt.sign({ id: data._id }, secret);
-
-    res
-      .cookie("token", token, {
-        httpOnly: true,
-      })
-      .status(201)
-      .json({ token: token, id: data._id, isLoggedIn: true });
+    res.status(201).json({ id: data._id, email: data.email });
   } catch (e) {
     console.log(e);
     res.status(400).json({ error: e });

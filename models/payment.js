@@ -9,8 +9,8 @@ const schema = new mongoose.Schema({
     type: Schema.Types.ObjectID,
     ref: "User",
   },
-  paymentID: { type: String, default: "" },
-  bookingTime: { type: Date, default: new Date.getTime() },
+  paymentId: { type: String, default: "" },
+  bookingTime: { type: Date, default: Date.now() },
   status: {
     type: String,
     enum: ["UNPAID", "PAID"],
