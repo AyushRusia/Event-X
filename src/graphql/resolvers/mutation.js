@@ -44,7 +44,7 @@ const mutations = {
     }
   },
 
-  createOrder: async (Args, req) => {
+  payOrder: async (Args, req) => {
     try {
       const userId = req.userId;
       if (!userId) return new Error("Unauthorized");

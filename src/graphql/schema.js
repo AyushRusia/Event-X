@@ -81,7 +81,7 @@ input BookingInput{
  type RootMutation {
      createUser(UserInput:UserInput):User
      createEvent(EventInput:EventInput):Event
-     createOrder(EventId:ID):Payment
+     payOrder(EventId:ID):Payment
      createBooking(BookingInput:BookingInput):Event
      deleteBooking(EventId:ID):Event
  }
