@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import PinDropIcon from "@material-ui/icons/PinDrop";
+import Snackbar from "../../context/snackbar";
 const useStyles = makeStyles({
   root: {
     minWidth: 280,
@@ -40,6 +41,7 @@ const useStyles = makeStyles({
 });
 const TempCard = () => {
   const classes = useStyles();
+  const Context2 = useContext(Snackbar);
   return (
     <>
       <Grid
@@ -86,14 +88,15 @@ const TempCard = () => {
             </CardContent>
           </CardActionArea>
           <CardActions className={classes.info}>
-            <Typography
-              color="primary"
-              gutterBottom
-              variant="h6"
-              component="h6"
+            <Button
+              color="secondary"
+              variant="outlined"
+              onClick={() => {
+                Context2.openbarfun("info", "Comg Soon");
+              }}
             >
-              Price
-            </Typography>
+              Cancel Event
+            </Button>
           </CardActions>
         </Card>
       </Grid>

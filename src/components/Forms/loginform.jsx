@@ -19,7 +19,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../context/auth";
-
+import Snackbar from "../../context/snackbar";
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -65,8 +65,9 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
-export default function LoginForm() {
+export default function LoginForm(props) {
   const Context = React.useContext(AuthContext);
+  const Context2 = React.useContext(Snackbar);
   const [showPassword, setShowPassword] = React.useState(false);
   const classes = useStyles();
   const history = useHistory();
@@ -91,6 +92,7 @@ export default function LoginForm() {
       });
 
       await Context.getLoggedIn();
+      Context2.openbarfun("success", "User Logged In");
       history.push("/event");
     } catch (error) {
       console.log(error.response.data);

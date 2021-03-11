@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles, createStyles, Typography } from "@material-ui/core";
-import { Grid } from "@material-ui/core";
-import Image from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 import AppBar from "../components/AppBar";
 import RegisterForm from "../components/Forms/registerform";
 const useStyles = makeStyles((theme) =>
@@ -16,18 +15,22 @@ const useStyles = makeStyles((theme) =>
     content: { margin: "auto", marginTop: "100px" },
     heading: {
       textAlign: "center",
-      fontFamily: "Raleway",
+      fontFamily: "arial",
       fontWeight: "700",
       color: "#7a1139",
+    },
+    imgcontainer: {
+      display: "flex",
+      justifyItems: "center",
+      alignItems: "flex-end",
     },
     image: {
       height: "350px",
       width: "",
       margin: "auto",
       [theme.breakpoints.down("md")]: {
-        height: "260px",
-        width: "270px",
-        margin: "auto",
+        height: "240px",
+        width: "240px",
       },
     },
     workarea: {
@@ -49,7 +52,9 @@ export default function Register() {
           <Typography className={classes.heading} variant="h4">
             Register to EventX
           </Typography>
-          <img src="/register.png" className={classes.image} />
+          <Box className={classes.imgcontainer}>
+            <img src="/register.svg" className={classes.image} />
+          </Box>
         </Grid>
         <Grid item xs={11} lg={6} className={classes.workarea}>
           <RegisterForm />

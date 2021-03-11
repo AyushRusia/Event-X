@@ -6,7 +6,8 @@ import ViewEvent from "./pages/events/viewEvents";
 import BookedEvent from "./pages/events/bookedEvents";
 import React from "react";
 import AuthContext from "./context/auth";
-
+import CustomizedSnackbars from "./components/snackbar";
+import Snackbar from "./context/snackbar";
 const Error = () => {
   return (
     <h1>
@@ -16,9 +17,13 @@ const Error = () => {
 };
 export default function Routers() {
   const context = React.useContext(AuthContext);
-  console.log("executed");
+  const context2 = React.useContext(Snackbar);
   return (
     <>
+      <CustomizedSnackbars
+        openbar={context2.openbar}
+        onclose={context2.closebarfun}
+      />
       <Switch>
         <Route exact path="/">
           {context.authdata.isLoggedIn ? <Redirect to="/event" /> : <Login />}
