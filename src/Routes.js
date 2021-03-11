@@ -4,6 +4,7 @@ import CreateEvent from "./pages/events/createEvent";
 import Login from "./pages/login";
 import ViewEvent from "./pages/events/viewEvents";
 import BookedEvent from "./pages/events/bookedEvents";
+import MyEvents from "./pages/events/myEvents";
 import React from "react";
 import AuthContext from "./context/auth";
 import CustomizedSnackbars from "./components/snackbar";
@@ -48,7 +49,7 @@ export default function Routers() {
                 <BookedEvent />
               </Route>
               <Route exact path="/event/myEvents">
-                <ViewEvent />
+                <MyEvents />
               </Route>
             </Switch>
           </>

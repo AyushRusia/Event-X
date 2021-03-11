@@ -2,14 +2,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
-import {
-  makeStyles,
-  createStyles,
-  Typography,
-  Paper,
-  Box,
-  Grid,
-} from "@material-ui/core";
+import { makeStyles, createStyles, Paper, Grid } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
@@ -87,7 +80,6 @@ export default function RegisterForm() {
     password: yup.string().required("Password is Required"),
   });
   const handleCity = (values, setValues, newValue) => {
-    console.log(newValue);
     setValues({
       ...values,
       city: newValue,

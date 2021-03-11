@@ -10,9 +10,13 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import PinDropIcon from "@material-ui/icons/PinDrop";
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
+    [theme.breakpoints.up("md")]: {
+      width: "380px",
+      border: "solid 3px black",
+    },
   },
   grid: {
     marginTop: "50px",
@@ -20,6 +24,9 @@ const useStyles = makeStyles({
   media: {
     height: 180,
     width: 280,
+    [theme.breakpoints.up("md")]: {
+      width: "380px",
+    },
   },
   title: {
     textAlign: "center",
@@ -32,12 +39,16 @@ const useStyles = makeStyles({
   p: {
     margin: "auto",
     width: 235,
+    padding: "5px",
+    [theme.breakpoints.up("md")]: {
+      width: "340px",
+    },
     height: 100,
     textAlign: "justify",
     border: "1px solid pink",
     overflow: "auto",
   },
-});
+}));
 const CustomCard = (props) => {
   const { eventdata, openDialog } = props;
   const classes = useStyles();

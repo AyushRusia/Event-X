@@ -35,8 +35,7 @@ export default function PaymentDialog(props) {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(payorder);
-      console.log("suceessful payment");
+
       setPending(false);
 
       //////////////////////////////////////////////////////booking event
@@ -64,7 +63,6 @@ export default function PaymentDialog(props) {
         }
       );
 
-      console.log(response.data);
       handleClose();
       history.push("/event/booked");
     } catch (e) {

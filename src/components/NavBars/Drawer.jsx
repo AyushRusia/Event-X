@@ -19,9 +19,9 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
-
 import axios from "axios";
 import AuthContext from "../../context/auth";
+import Snackbar from "../../context/snackbar";
 import list from "./list";
 const drawerWidth = 240;
 
@@ -101,11 +101,13 @@ const useStyles = makeStyles((theme) => ({
 export default function MiniDrawer() {
   const classes = useStyles();
   const Context = useContext(AuthContext);
+  const Context2 = useContext(Snackbar);
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
 
   async function Logout() {
     const logout = await axios.get("http://localhost:8000/auth/logout");
+    Context2.openbarfun("info", logout.data);
     console.log(logout);
     await Context.getLoggedIn();
     history.push("/");

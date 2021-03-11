@@ -90,7 +90,7 @@ export default function LoginForm(props) {
       const response = await axios.post("http://localhost:8000/auth/login", {
         ...values,
       });
-
+      console.log(response);
       await Context.getLoggedIn();
       Context2.openbarfun("success", "User Logged In");
       history.push("/event");

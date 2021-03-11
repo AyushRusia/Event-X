@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CustomCard from "../../components/CustomCard";
+import CustomCard from "../../components/Cards/CustomCard";
 import { Grid, Box, makeStyles, createStyles } from "@material-ui/core";
-import PaymentDialog from "../../components/paymentDialog";
+import PaymentDialog from "../../components/DialogBoxes/paymentDialog";
 import Drawer from "../../components/NavBars/Drawer";
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -72,11 +72,11 @@ const ViewEvent = () => {
       <div>
         <Drawer />
         <Box className={classes.root}>
-          <Grid container spacing={0} justifyContent="center">
+          <Grid container justifyContent="center">
             {data.map((pata) => {
               return (
                 <>
-                  <Grid item xs={9} md={5} lg={4}>
+                  <Grid item xs={9} md={6} lg={4}>
                     {
                       <CustomCard
                         eventdata={pata}

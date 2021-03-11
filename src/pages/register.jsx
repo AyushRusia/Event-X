@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles, createStyles, Typography } from "@material-ui/core";
 import { Grid, Box } from "@material-ui/core";
-import AppBar from "../components/AppBar";
+import AppBar from "../components/NavBars/AppBar";
 import RegisterForm from "../components/Forms/registerform";
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -53,7 +53,7 @@ export default function Register() {
             Register to EventX
           </Typography>
           <Box className={classes.imgcontainer}>
-            <img src="/register.svg" className={classes.image} />
+            <img src="/register.svg" alt="Cover" className={classes.image} />
           </Box>
         </Grid>
         <Grid item xs={11} lg={6} className={classes.workarea}>
