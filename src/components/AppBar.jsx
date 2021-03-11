@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
+  const { page } = props;
   const classes = useStyles();
   const history = useHistory();
-  const location = useLocation();
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -31,27 +31,16 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Event Registration Portal
           </Typography>
+
           <Button
             onClick={() => {
-              history.push("/");
+              history.push(page === "login" ? "/register" : "/");
             }}
             color="secondary"
             variant="contained"
             className={classes.btn}
           >
-            {/* <Link to="/">Login</Link> */}
-            Login
-          </Button>
-          <Button
-            onClick={() => {
-              history.push("/register");
-            }}
-            color="secondary"
-            variant="contained"
-            className={classes.btn}
-          >
-            {/* <Link to="/register">Register</Link> */}
-            Register
+            {page === "login" ? "Register" : "Login"}
           </Button>
         </Toolbar>
       </AppBar>

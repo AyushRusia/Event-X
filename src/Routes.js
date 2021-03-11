@@ -3,6 +3,7 @@ import Register from "./pages/register";
 import CreateEvent from "./pages/events/createEvent";
 import Login from "./pages/login";
 import ViewEvent from "./pages/events/viewEvents";
+import BookedEvent from "./pages/events/bookedEvents";
 import React from "react";
 import AuthContext from "./context/auth";
 
@@ -39,7 +40,7 @@ export default function Routers() {
                 <CreateEvent />
               </Route>
               <Route exact path="/event/booked">
-                <CreateEvent />
+                <BookedEvent />
               </Route>
               <Route exact path="/event/myEvents">
                 <ViewEvent />

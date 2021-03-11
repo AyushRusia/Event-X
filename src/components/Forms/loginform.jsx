@@ -19,6 +19,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../context/auth";
+
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -29,9 +30,10 @@ const useStyles = makeStyles((theme) =>
     },
     heading: {
       margin: "auto",
-      color: "#43ff23",
+      color: "#7a1139",
       marginTop: "25px",
       marginBottom: "15px",
+      fontWeight: "900",
     },
     griditem: {
       display: "flex",
@@ -41,7 +43,7 @@ const useStyles = makeStyles((theme) =>
     },
     form: {
       display: "block",
-      //width: "85vh",
+      backgroundColor: "#bbb",
       boxSizing: "border-box",
       padding: "50px",
       marginRight: "20px",
@@ -57,6 +59,7 @@ const useStyles = makeStyles((theme) =>
     },
     btn: {
       margin: "auto",
+      fontWeight: "800",
       marginTop: "30px",
       width: "150px",
     },
@@ -168,8 +171,7 @@ export default function LoginForm() {
                     <Grid item xs={12} className={classes.griditem}>
                       <Button
                         type="submit"
-                        color="primary"
-                        variant="contained"
+                        variant="outlined"
                         className={classes.btn}
                       >
                         Submit

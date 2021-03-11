@@ -1,15 +1,35 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CustomCard from "../../components/CustomCard";
-import Grid from "@material-ui/core/Grid";
+import Drawer from "../../components/NavBars/Drawer";
+import TempCard from "../../components/Cards/tempcard";
+import { Grid, Box, makeStyles, createStyles } from "@material-ui/core";
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      marginLeft: theme.spacing(8),
+      [theme.breakpoints.up("md")]: {
+        marginLeft: theme.spacing(14),
+      },
+    },
+    content: {},
+    workarea: {
+      //border: "solid 3px black",
+      marginTop: "60px",
+    },
+  })
+);
 const fetchEvents = async () => {
   try {
     const body = `query{
-                  getEligibleEvents{
-                    _id
-                    title
-                    description
-                    price
+                  getUserDetails{
+                    bookedEvents{
+                      event{
+                        title
+                        description
+                        city
+                      }
+                    }
+                                    
                     }
                   }`;
     const events = await axios.post(
@@ -24,13 +44,14 @@ const fetchEvents = async () => {
       }
     );
 
-    const allevents = events.data.data.getEligibleEvents;
+    const allevents = events.data.data.getUserDetails.bookedEvents;
     return allevents;
   } catch (e) {
     console.log(e.response.data);
   }
 };
 const BookedEvent = () => {
+  const classes = useStyles();
   const [data, setData] = useState([]);
   useEffect(() => {
     fetchEvents()
@@ -43,22 +64,22 @@ const BookedEvent = () => {
   console.log(data);
   return (
     <>
-      <Grid container spacing={1} justify="center">
-        {data.map((data) => {
-          return (
-            <>
-              <Grid item lg={3} justify="center">
-                <CustomCard
-                  title={data.title}
-                  description={data.description}
-                  price={data.price}
-                  _id={data._id}
-                />
-              </Grid>
-            </>
-          );
-        })}
-      </Grid>
+      <div>
+        <Drawer />
+        <Box className={classes.root}>
+          <Grid container spacing={0} justifyContent="center">
+            {data.map((pata) => {
+              return (
+                <>
+                  <Grid item xs={9} md={5} lg={4}>
+                    <TempCard />
+                  </Grid>
+                </>
+              );
+            })}
+          </Grid>
+        </Box>
+      </div>
     </>
   );
 };

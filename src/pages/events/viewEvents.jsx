@@ -27,6 +27,8 @@ const fetchEvents = async () => {
                     title
                     description
                     price
+                    city
+                    date
                     }
                   }`;
     const events = await axios.post(
