@@ -10,8 +10,9 @@ import {
 } from "@material-ui/core";
 
 import { Paper, Button } from "@material-ui/core";
-
 import axios from "axios";
+
+import ClientDialog from "../DialogBoxes/clientDialog";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -50,19 +51,27 @@ const getClients = async (EventId) => {
 export default function DenseTable(props) {
   const { data } = props;
   const [clients, setClients] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
   const classes = useStyles();
   const handleClients = async (EventId) => {
     try {
       const data = await getClients(EventId);
       setClients(data);
+      setOpenDialog(true);
     } catch (e) {
       console.log(e);
     }
   };
-  console.log(clients);
   if (data) {
     return (
       <>
+        <ClientDialog
+          openDialog={openDialog}
+          closefun={() => {
+            setOpenDialog(false);
+          }}
+          data={clients}
+        />
         <TableContainer component={Paper}>
           <Table
             className={classes.table}

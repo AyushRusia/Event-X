@@ -7,7 +7,8 @@ import Drawer from "../../components/NavBars/Drawer";
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      marginLeft: theme.spacing(8),
+      marginLeft: theme.spacing(5),
+      marginTop: "20px",
       [theme.breakpoints.up("md")]: {
         marginLeft: theme.spacing(14),
       },

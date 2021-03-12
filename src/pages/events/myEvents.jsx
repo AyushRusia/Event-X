@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) =>
       },
     },
     content: {
-      marginTop: "30px",
+      marginTop: "70px",
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
     },

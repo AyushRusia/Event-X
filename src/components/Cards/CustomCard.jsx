@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textAlign: "center",
+    color: "#7a1139",
+    fontWeight: "900",
   },
   info: {
     display: "flex",
@@ -47,6 +49,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "justify",
     border: "1px solid pink",
     overflow: "auto",
+  },
+  dv: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
 const CustomCard = (props) => {
@@ -70,20 +78,27 @@ const CustomCard = (props) => {
               title="Contemplative Reptile"
             />
             <CardContent>
-              <Typography
-                gutterBottom
-                className={classes.title}
-                variant="h5"
-                component="h4"
-              >
+              <Typography gutterBottom className={classes.title} variant="h5">
                 {eventdata.title}
               </Typography>
-              <Typography component="span" className={classes.info}>
-                <Typography gutterBottom variant="h6" component="span">
-                  <CalendarTodayIcon /> {eventdata.date}
+              <Typography
+                component="span"
+                color="primary"
+                className={classes.info}
+              >
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className={classes.dv}
+                >
+                  <CalendarTodayIcon color="secondary" /> {eventdata.date}
                 </Typography>
-                <Typography gutterBottom variant="h6" component="span">
-                  <PinDropIcon />
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className={classes.dv}
+                >
+                  <PinDropIcon color="secondary" />
                   {eventdata.city}
                 </Typography>
               </Typography>
@@ -104,7 +119,7 @@ const CustomCard = (props) => {
               variant="h6"
               component="h6"
             >
-              {eventdata.price}
+              Price {eventdata.price}
             </Typography>
             <Button
               onClick={openDialog}

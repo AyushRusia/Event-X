@@ -1,8 +1,9 @@
 import { Route, Switch, Redirect } from "react-router";
 import Register from "./pages/register";
-import CreateEvent from "./pages/events/createEvent";
+import Profile from "./pages/profile";
 import Login from "./pages/login";
 import ViewEvent from "./pages/events/viewEvents";
+import CreateEvent from "./pages/events/createEvent";
 import BookedEvent from "./pages/events/bookedEvents";
 import MyEvents from "./pages/events/myEvents";
 import React from "react";
@@ -50,6 +51,9 @@ export default function Routers() {
               </Route>
               <Route exact path="/event/myEvents">
                 <MyEvents />
+              </Route>
+              <Route exact path="/profile">
+                <Profile />
               </Route>
             </Switch>
           </>

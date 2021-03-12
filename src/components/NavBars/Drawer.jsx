@@ -81,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9) + 1,
     },
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   toolbar: {
     alignSelf: "center",
@@ -182,6 +185,23 @@ export default function MiniDrawer() {
           ))}
         </List>
         <Divider />
+        <List>
+          <ListItem
+            button="profile"
+            onClick={() => {
+              history.push("/profile");
+            }}
+          >
+            <ListItemIcon
+              onClick={() => {
+                history.push("/profile");
+              }}
+            >
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </ListItem>
+        </List>
         <div className={classes.toolbar}>
           <IconButton onClick={() => setOpen(!open)}>
             {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}

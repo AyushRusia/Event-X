@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) =>
     root: {
       display: "flex",
       justifyContent: "center",
-      marginLeft: theme.spacing(8),
+      marginTop: theme.spacing(4),
       [theme.breakpoints.up("md")]: {
         marginLeft: theme.spacing(14),
       },
@@ -59,7 +59,7 @@ export default function CreateEvent() {
         <Grid container justifyContent="center">
           <Grid item xs={12} lg={6} className={classes.content}>
             <Box>
-              <Typography variant="h5" className={classes.heading}>
+              <Typography variant="h4" className={classes.heading}>
                 Create Your Event
               </Typography>
             </Box>
