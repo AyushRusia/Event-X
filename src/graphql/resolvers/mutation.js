@@ -9,7 +9,7 @@ const mutations = {
       //if (!req.userID) return Error("Unauthorized");
       const tuser = await User.findOne({ email: Args.UserInput.email });
       if (tuser) return Error("email is taken");
-      const hashPassword = await bcrypt.hash(Args.UserInput.password, 5);
+      const hashPassword = await bcrypt.hash(Args.UserInput.password, 4);
       const user = await new User({
         name: Args.UserInput.name,
         email: Args.UserInput.email,

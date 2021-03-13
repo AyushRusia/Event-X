@@ -5,12 +5,12 @@ import { graphqlHTTP } from "express-graphql";
 import schema from "./graphql/schema.js";
 import resolvers from "./graphql/resolver.js";
 import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
 import router from "./auth/authrouter";
 import cors from "cors";
 import jwt from "jsonwebtoken";
-const PORT = 8000;
-const secret = "asdfghjklasdfghjkasdfghjkasdfghasdfghj";
+import dotenv from "dotenv";
+dotenv.config();
+
 app.use(cookieParser());
 app.use(
   cors({
@@ -26,7 +26,7 @@ app.use("/auth", router);
 app.use("/graphql", async (req, res, next) => {
   const token = req.cookies.token;
   if (token) {
-    const verify = await jwt.verify(token, secret);
+    const verify = await jwt.verify(token, process.env.JWT_SECRET);
     req.userId = verify.user;
   }
   return graphqlHTTP({
@@ -35,12 +35,16 @@ app.use("/graphql", async (req, res, next) => {
     rootValue: resolvers,
   })(req, res);
 });
-app.listen(PORT, () => console.log(`Server Running On port ${PORT}`));
+app.listen(process.env.PORT, () =>
+  console.log(`Server Running On port ${process.env.PORT}`)
+);
 
 mongoose
-  .connect("mongodb://localhost:27017/graphqlpr", {
+  .connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then(() => console.log("databse connected"))
   .catch((e) => console.log(e));

@@ -3,7 +3,6 @@ import UserModel from "../../models/user";
 import bcrypt from "bcryptjs";
 
 import jwt from "jsonwebtoken";
-const secret = "asdfghjklasdfghjkasdfghjkasdfghasdfghj";
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -21,7 +20,7 @@ router.post("/register", async (req, res) => {
     console.log(date_of_birth);
     const tuser = await UserModel.findOne({ email });
     if (tuser) return res.status(400).json({ error: "email is taken" });
-    const hashPassword = await bcrypt.hash(password, 5);
+    const hashPassword = await bcrypt.hash(password, 4);
     const user = await new UserModel({
       name: `${fname} ${lname}`,
       email: email,
@@ -52,8 +51,8 @@ router.post("/login", async (req, res) => {
     if (!matchPassword)
       return res.status(400).json({ error: "Password Not Matched" });
 
-    const token = await jwt.sign({ user: user._id }, secret, {
-      expiresIn: "7d",
+    const token = await jwt.sign({ user: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
     });
     req.userId = user._id;
     res.cookie("token", token, {});
@@ -86,7 +85,7 @@ router.get("/isloggedIn", async (req, res) => {
         isLoggedIn: false,
       });
 
-    const verify = await jwt.verify(token, secret);
+    const verify = await jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await UserModel.findById(verify.user);
     if (!user)
