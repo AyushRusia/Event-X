@@ -66,7 +66,7 @@ export default function RegisterForm() {
     phone: "",
     city: "",
     college: "",
-    dob: "",
+    date_of_birth: "",
   };
 
   const validationSchema = yup.object({
@@ -256,7 +256,7 @@ export default function RegisterForm() {
                         </Field>
                       </Grid>
                       <Grid item xs={9} lg={5} className={classes.griditem}>
-                        <Field name="dob">
+                        <Field name="date_of_birth">
                           {({ field, meta }) => (
                             <TextField
                               id="date"

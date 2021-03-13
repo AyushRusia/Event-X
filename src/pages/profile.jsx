@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles, createStyles, Box } from "@material-ui/core";
 import { Grid, Typography, Button } from "@material-ui/core";
 import Drawer from "../components/NavBars/Drawer";
-import UpdateForm from "../components/Forms/updateprofilefrom";
+import NewForm from "../components/Forms/newform";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -63,8 +64,59 @@ const useStyles = makeStyles((theme) =>
     },
   })
 );
+
+const fetchUser = async () => {
+  try {
+    const body = `query{
+  getUserDetails{
+    name
+    email
+    phone
+    city
+    college
+    date_of_birth
+    createdEventsCount
+    bookedEventsCount
+  }
+}`;
+
+    const response = await axios.post(
+      "http://localhost:8000/graphql",
+      {
+        query: body,
+      },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    const userdetails = response.data.data.getUserDetails;
+    return userdetails;
+  } catch (e) {
+    console.log(e.response.data);
+  }
+};
 export default function Profile() {
   const classes = useStyles();
+  const [update, setUpdate] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
+  const [initialValues, setInitialValues] = useState({
+    name: "",
+    newpassword: "",
+    phone: "",
+    city: "",
+    college: "",
+    date_of_birth: "",
+  });
+
+  useEffect(() => {
+    fetchUser()
+      .then((data) => {
+        setUserDetails(data);
+        setInitialValues(data);
+      })
+      .catch((e) => console.log(e));
+  }, [setUserDetails, setUpdate]);
 
   return (
     <>
@@ -93,14 +145,27 @@ export default function Profile() {
               </Typography>
             </Box>
             <Box mt={4}>
-              <Button variant="outlined" color="secondary">
-                {" "}
-                Update Profile{" "}
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => {
+                  setUpdate(true);
+                }}
+              >
+                Update Profile
               </Button>
             </Box>
           </Grid>
           <Grid item xs={11} lg={6} className={classes.workarea}>
-            <UpdateForm />
+            {
+              <NewForm
+                update={update}
+                setupdatefalse={() => {
+                  setUpdate(false);
+                }}
+                initialValues={initialValues}
+              />
+            }
           </Grid>
         </Grid>
       </Box>

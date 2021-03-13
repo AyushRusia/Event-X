@@ -1,7 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CustomCard from "../../components/Cards/CustomCard";
-import { Grid, Box, makeStyles, createStyles } from "@material-ui/core";
+import ViewCard from "../../components/Cards/ViewCard";
+import {
+  Grid,
+  Box,
+  makeStyles,
+  createStyles,
+  Typography,
+} from "@material-ui/core";
 import PaymentDialog from "../../components/DialogBoxes/paymentDialog";
 import Drawer from "../../components/NavBars/Drawer";
 const useStyles = makeStyles((theme) =>
@@ -13,10 +19,23 @@ const useStyles = makeStyles((theme) =>
         marginLeft: theme.spacing(14),
       },
     },
-    content: {},
+    content: {
+      marginTop: "40px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    },
     workarea: {
       //border: "solid 3px black",
       marginTop: "60px",
+    },
+    heading: {
+      margin: "auto",
+      color: "#7a1139",
+      marginTop: "25px",
+      marginBottom: "15px",
+      fontWeight: "900",
     },
   })
 );
@@ -72,6 +91,13 @@ const ViewEvent = () => {
       />
       <div>
         <Drawer />
+        <Grid container className={classes.content}>
+          <Box>
+            <Typography variant="h4" className={classes.heading}>
+              Book Your Event
+            </Typography>
+          </Box>
+        </Grid>
         <Box className={classes.root}>
           <Grid container justifyContent="center">
             {data.map((pata) => {
@@ -79,7 +105,7 @@ const ViewEvent = () => {
                 <>
                   <Grid item xs={9} md={6} lg={4}>
                     {
-                      <CustomCard
+                      <ViewCard
                         eventdata={pata}
                         openDialog={() => {
                           setDummy(pata);

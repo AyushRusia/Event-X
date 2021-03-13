@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -10,10 +10,13 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import PinDropIcon from "@material-ui/icons/PinDrop";
-import Snackbar from "../../context/snackbar";
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
+    [theme.breakpoints.up("md")]: {
+      width: "380px",
+      border: "solid 3px black",
+    },
   },
   grid: {
     marginTop: "50px",
@@ -21,9 +24,14 @@ const useStyles = makeStyles({
   media: {
     height: 180,
     width: 280,
+    [theme.breakpoints.up("md")]: {
+      width: "380px",
+    },
   },
   title: {
     textAlign: "center",
+    color: "#7a1139",
+    fontWeight: "900",
   },
   info: {
     display: "flex",
@@ -33,15 +41,25 @@ const useStyles = makeStyles({
   p: {
     margin: "auto",
     width: 235,
+    padding: "5px",
+    [theme.breakpoints.up("md")]: {
+      width: "340px",
+    },
     height: 100,
     textAlign: "justify",
     border: "1px solid pink",
     overflow: "auto",
   },
-});
-const TempCard = () => {
+  dv: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+}));
+const ViewCard = (props) => {
+  const { eventdata, openDialog } = props;
   const classes = useStyles();
-  const Context2 = useContext(Snackbar);
   return (
     <>
       <Grid
@@ -60,21 +78,28 @@ const TempCard = () => {
               title="Contemplative Reptile"
             />
             <CardContent>
-              <Typography
-                gutterBottom
-                className={classes.title}
-                variant="h5"
-                component="h4"
-              >
-                Title
+              <Typography gutterBottom className={classes.title} variant="h5">
+                {eventdata.title}
               </Typography>
-              <Typography component="span" className={classes.info}>
-                <Typography gutterBottom variant="h6" component="span">
-                  <CalendarTodayIcon /> Date
+              <Typography
+                component="span"
+                color="primary"
+                className={classes.info}
+              >
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className={classes.dv}
+                >
+                  <CalendarTodayIcon color="secondary" /> {eventdata.date}
                 </Typography>
-                <Typography gutterBottom variant="h6" component="span">
-                  <PinDropIcon />
-                  City
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className={classes.dv}
+                >
+                  <PinDropIcon color="secondary" />
+                  {eventdata.city}
                 </Typography>
               </Typography>
               <Typography
@@ -83,19 +108,26 @@ const TempCard = () => {
                 component="p"
                 className={classes.p}
               >
-                Description
+                {eventdata.description}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions className={classes.info}>
-            <Button
-              color="secondary"
-              variant="outlined"
-              onClick={() => {
-                Context2.openbarfun("info", "Comg Soon");
-              }}
+            <Typography
+              color="primary"
+              gutterBottom
+              variant="h6"
+              component="h6"
             >
-              Cancel Event
+              Price {eventdata.price}
+            </Typography>
+            <Button
+              onClick={openDialog}
+              size="small"
+              color="primary"
+              variant="outlined"
+            >
+              Book Event
             </Button>
           </CardActions>
         </Card>
@@ -104,4 +136,4 @@ const TempCard = () => {
   );
 };
 
-export default TempCard;
+export default ViewCard;

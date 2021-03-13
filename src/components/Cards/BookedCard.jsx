@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import PinDropIcon from "@material-ui/icons/PinDrop";
+import Snackbar from "../../context/snackbar";
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 280,
@@ -38,33 +39,27 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
     alignItems: "baseline",
   },
-  p: {
-    margin: "auto",
-    width: 235,
-    padding: "5px",
-    [theme.breakpoints.up("md")]: {
-      width: "340px",
-    },
-    height: 100,
-    textAlign: "justify",
-    border: "1px solid pink",
-    overflow: "auto",
-  },
+
   dv: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
+  hpid: {
+    paddingLeft: "15px",
+    fontWeight: "600",
+  },
 }));
-const CustomCard = (props) => {
-  const { eventdata, openDialog } = props;
+const BookedCard = (props) => {
+  const { event } = props;
   const classes = useStyles();
+  const Context2 = useContext(Snackbar);
   return (
     <>
       <Grid
         item
-        xs={10}
+        xs={11}
         lg={4}
         justify="center"
         alignItem="center"
@@ -79,7 +74,7 @@ const CustomCard = (props) => {
             />
             <CardContent>
               <Typography gutterBottom className={classes.title} variant="h5">
-                {eventdata.title}
+                {event.event.title}
               </Typography>
               <Typography
                 component="span"
@@ -91,7 +86,7 @@ const CustomCard = (props) => {
                   component="span"
                   className={classes.dv}
                 >
-                  <CalendarTodayIcon color="secondary" /> {eventdata.date}
+                  <CalendarTodayIcon color="secondary" /> {event.event.date}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -99,30 +94,34 @@ const CustomCard = (props) => {
                   className={classes.dv}
                 >
                   <PinDropIcon color="secondary" />
-                  {eventdata.city}
+                  {event.event.city}
                 </Typography>
               </Typography>
-              <Typography
-                variant="body2"
-                color="secondary"
-                component="p"
-                className={classes.p}
-              >
-                {eventdata.description}
-              </Typography>
             </CardContent>
+
+            <Typography
+              color="secondary"
+              gutterBottom
+              component="p"
+              className={classes.hpid}
+            >
+              Host <span style={{ color: "blue" }}>{event.event.host}</span>
+            </Typography>
+            <Typography
+              color="secondary"
+              gutterBottom
+              component="p"
+              className={classes.hpid}
+            >
+              PaymentId:
+              <span style={{ color: "blue" }}>{event.paymentId}</span>
+            </Typography>
           </CardActionArea>
           <CardActions className={classes.info}>
-            <Typography
-              color="primary"
-              gutterBottom
-              variant="h6"
-              component="h6"
-            >
-              Price {eventdata.price}
-            </Typography>
             <Button
-              onClick={openDialog}
+              onClick={() => {
+                Context2.openbarfun("info", "You Can't cancel This Event");
+              }}
               size="small"
               color="primary"
               variant="outlined"
@@ -136,4 +135,4 @@ const CustomCard = (props) => {
   );
 };
 
-export default CustomCard;
+export default BookedCard;

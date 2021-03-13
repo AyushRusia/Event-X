@@ -83,6 +83,7 @@ export default function CreateEventForm() {
     price:${values.price},
     description:"${values.description}",
     city:"${values.city}"
+    host:"${values.host}"
     date:"${values.date}"
     
   }){

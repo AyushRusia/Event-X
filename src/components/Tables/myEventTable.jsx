@@ -80,11 +80,11 @@ export default function DenseTable(props) {
           >
             <TableHead>
               <TableRow>
-                <TableCell>EventId</TableCell>
-                <TableCell align="right">Title</TableCell>
+                <TableCell align="left">EventId</TableCell>
+                <TableCell align="center">Title</TableCell>
                 <TableCell align="center">Date</TableCell>
-                <TableCell align="right">Venue</TableCell>
-                <TableCell align="right">Price</TableCell>
+                <TableCell align="center">Venue</TableCell>
+                <TableCell align="center">Price</TableCell>
                 <TableCell align="center">Clients</TableCell>
               </TableRow>
             </TableHead>
