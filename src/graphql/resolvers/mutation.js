@@ -105,7 +105,7 @@ const mutations = {
         event: event,
         paymentId: Args.BookingInput.paymentId,
       });
-      await user.updateOne({ boookedEventsCount: user.boookedEventsCount++ });
+      await user.updateOne({ bookedEventsCount: user.bookedEventsCount++ });
 
       await event.save();
       await user.save();
