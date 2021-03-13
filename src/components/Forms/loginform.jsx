@@ -95,7 +95,9 @@ export default function LoginForm(props) {
       Context2.openbarfun("success", "User Logged In");
       history.push("/event");
     } catch (error) {
-      console.log(error.response.data);
+      if (error.response.data.error)
+        Context2.openbarfun("error", error.response.data.error);
+      else Context2.openbarfun("error", "Something Went Worng");
     }
   };
 

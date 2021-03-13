@@ -7,7 +7,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Snackbar from "../../context/snackbar";
 export default function PaymentDialog(props) {
+  const Context2 = React.useContext(Snackbar);
   const { openDialog, onClose, dummy } = props;
   const [pending, setPending] = React.useState(false);
   const history = useHistory();
@@ -64,10 +66,13 @@ export default function PaymentDialog(props) {
       );
 
       handleClose();
+      if (response.data.data.createBooking.title)
+        Context2.openbarfun("success", "Event Booked Successfully");
       history.push("/event/booked");
     } catch (e) {
       setPending(false);
       console.log(e.response.data);
+      Context2.openbarfun("error", "Something Went wrong");
       handleClose();
     }
   };
@@ -78,18 +83,15 @@ export default function PaymentDialog(props) {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">
-        {"Use Google's location service?"}
-      </DialogTitle>
+      <DialogTitle id="alert-dialog-title">Confirm</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Let Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running.
+          Are you Sure to pay for this event
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Disagree
+          Cancel
         </Button>
         <Button
           disabled={pending}
@@ -97,7 +99,7 @@ export default function PaymentDialog(props) {
           color="primary"
           autoFocus
         >
-          Agree
+          Confirm
         </Button>
       </DialogActions>
     </Dialog>

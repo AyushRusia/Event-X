@@ -47,8 +47,8 @@ const useStyles = makeStyles((theme) =>
       width: "",
       margin: "auto",
       [theme.breakpoints.down("md")]: {
-        height: "80px",
-        width: "80px",
+        height: "100px",
+        width: "100px",
       },
       info: {
         display: "flex",
@@ -134,14 +134,14 @@ export default function Profile() {
             </Box>
             <Box>
               <Typography variant="h6" className={classes.heading}>
-                Email:ayushrusia@gmail.com
+                Email:{userDetails.email}
               </Typography>
 
               <Typography variant="h6" component="h6" className={classes.dv}>
-                Created Events
+                Created Events {userDetails.createdEventsCount}
               </Typography>
               <Typography variant="h6" component="h6" className={classes.dv}>
-                Booked Events
+                Booked Events {userDetails.bookedEventsCount}
               </Typography>
             </Box>
             <Box mt={4}>

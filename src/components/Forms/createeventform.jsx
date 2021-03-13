@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
@@ -9,8 +9,9 @@ import TextField from "@material-ui/core/TextField";
 
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-
+import Snackbar from "../../context/snackbar";
 const cities = ["Bhopal", "Jabalpur", "Gwalior"];
+
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme) =>
 export default function CreateEventForm() {
   const classes = useStyles();
   const history = useHistory();
-
+  const Context2 = useContext(Snackbar);
   const inititalValues = {
     title: "",
     price: "",
@@ -105,10 +106,12 @@ export default function CreateEventForm() {
           },
         }
       );
-      console.log(response);
+      if (response.data.data.createEvent.title)
+        Context2.openbarfun("success", "Event created");
       history.push("/event");
     } catch (error) {
       console.log(error.response.data);
+      Context2.openbarfun("error", "Something Went Wrong");
     }
   };
 

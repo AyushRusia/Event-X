@@ -123,10 +123,10 @@ const BookedCard = (props) => {
                 Context2.openbarfun("info", "You Can't cancel This Event");
               }}
               size="small"
-              color="primary"
+              color="secondary"
               variant="outlined"
             >
-              Book Event
+              Cancel Event
             </Button>
           </CardActions>
         </Card>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
@@ -12,7 +12,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import IconButton from "@material-ui/core/IconButton";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-
+import Snackbar from "../../context/snackbar";
 const cities = ["Bhopal", "Jabalpur", "Gwalior"];
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) =>
 );
 export default function RegisterForm() {
   const classes = useStyles();
+  const Context2 = useContext(Snackbar);
   const history = useHistory();
   const [showPassword, setShowPassword] = React.useState(false);
   const inititalValues = {
@@ -90,10 +91,14 @@ export default function RegisterForm() {
       const response = await axios.post("http://localhost:8000/auth/register", {
         ...values,
       });
-      console.log(response);
+      if (response.data.email)
+        Context2.openbarfun("success", " Registered Successfully");
+
       history.push("/");
     } catch (error) {
-      console.log(error.response.data);
+      if (error.response.data.error)
+        Context2.openbarfun("error", error.response.data.error);
+      else Context2.openbarfun("error", "Something Went Worng");
     }
   };
 

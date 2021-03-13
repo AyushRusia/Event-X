@@ -123,10 +123,12 @@ export default function NewForm(props) {
           },
         }
       );
-      Context2.openbarfun("success", "Profile Updated");
-      history.push("/profile");
+      await axios.get("http://localhost:8000/auth/logout");
+      Context2.openbarfun("success", "Profile Updated ,Login Again");
+      history.push("/");
     } catch (error) {
       console.log(error.response.data);
+      Context2.openbarfun("error", "Something Went Wrong");
     }
   };
 
