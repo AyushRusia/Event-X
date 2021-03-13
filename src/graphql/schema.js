@@ -28,6 +28,9 @@ type Event {
     title:String!
     description:String
     price:String
+    city:String
+    host:String
+    date:String
     clientsCount:Int
     creator:[User!]
     clients:[User!]
@@ -70,13 +73,24 @@ input UserInput{
     title:String!
     description:String
     price:Float!
-    venue:String
-    time:String
+    city:String
+    host:String
+    date:String
+    
 
  }
 input BookingInput{
     EventId:ID
     paymentId:String
+}
+input updateUserInput{
+    name:String!
+    phone:String!
+    password:String
+    city:String
+    college:String
+    date_of_birth:String
+
 }
  type RootMutation {
      createUser(UserInput:UserInput):User
@@ -84,6 +98,7 @@ input BookingInput{
      payOrder(EventId:ID):Payment
      createBooking(BookingInput:BookingInput):Event
      deleteBooking(EventId:ID):Event
+     updateProfile(updateUserInput:updateUserInput):User
  }
  schema{
     query:RootQuery

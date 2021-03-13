@@ -60,6 +60,8 @@ const queries = {
       if (!userId) return new Error("Unathorized");
 
       const user = await User.findById(userId);
+      const dob = user.date_of_birth.toISOString().slice(0, 10);
+
       const createdEvents = await Event.find({
         _id: { $in: user.createdEvents },
       });
@@ -68,8 +70,10 @@ const queries = {
         ...user._doc,
         createdEvents: createdEvents,
         bookedEvents: bookedEvents,
+        date_of_birth: dob,
       };
     } catch (e) {
+      console.log(e);
       return Error(e.data);
     }
   },
@@ -98,7 +102,7 @@ const queries = {
           email: client.email,
           phone: client.phone,
           paymentId: payment.paymentId,
-          bookingTime: payment.bookingTime,
+          bookingTime: payment.bookingTime.toISOString().slice(0, 19),
         };
 
         return { ...clientData };

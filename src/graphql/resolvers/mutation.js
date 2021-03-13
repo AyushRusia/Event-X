@@ -30,6 +30,9 @@ const mutations = {
         description: Args.EventInput.description,
         price: Args.EventInput.price,
         creator: req.userId,
+        city: Args.EventInput.city,
+        date: Args.EventInput.date,
+        host: Args.EventInput.host,
       });
       const data = await event.save();
       const user = await User.findById(req.userId);
@@ -111,6 +114,32 @@ const mutations = {
     } catch (e) {
       console.log(e);
       return Error(e);
+    }
+  },
+  updateProfile: async (Args, req) => {
+    try {
+      const { updateUserInput } = Args;
+      const userId = req.userId;
+      console.log(userId);
+      const updatedUser = await User.findByIdAndUpdate(userId, {
+        name: updateUserInput.name,
+        phone: updateUserInput.phone,
+        city: updateUserInput.city,
+        college: updateUserInput.college,
+        date_of_birth: updateUserInput.date_of_birth,
+      });
+      if (updateUserInput.password !== "undefined") {
+        console.log("updating password also");
+        console.log(updateUserInput.password);
+        const hashPassword = await bcrypt.hash(updateUserInput.password, 4);
+        await updatedUser.updateOne({ password: hashPassword });
+      }
+      await updatedUser.save();
+      const newValues = await User.findById(userId);
+      return newValues;
+    } catch (e) {
+      console.log(e);
+      return Error("Something Went Wrong");
     }
   },
 };

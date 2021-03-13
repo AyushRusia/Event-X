@@ -29,14 +29,14 @@ const user = new mongoose.Schema({
   },
   date_of_birth: {
     type: Date,
-    default: "",
+    default: new Date(),
   },
 
   createdEventsCount: {
     type: Number,
     default: 0,
   },
-  boookedEventsCount: {
+  bookedEventsCount: {
     type: Number,
     default: 0,
   },

@@ -13,9 +13,9 @@ const event = new mongoose.Schema({
     type: Number,
     default: "",
   },
-  venue: { type: String, default: "" },
+  city: { type: String, default: "" },
   host: { type: String, default: "" },
-  time: { type: Date, default: Date.now() },
+  date: { type: String },
 
   creator: {
     type: Schema.Types.ObjectId,

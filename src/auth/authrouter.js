@@ -16,8 +16,9 @@ router.post("/register", async (req, res) => {
       phone,
       city,
       college,
-      dob,
+      date_of_birth,
     } = req.body;
+    console.log(date_of_birth);
     const tuser = await UserModel.findOne({ email });
     if (tuser) return res.status(400).json({ error: "email is taken" });
     const hashPassword = await bcrypt.hash(password, 5);
@@ -28,7 +29,7 @@ router.post("/register", async (req, res) => {
       password: hashPassword,
       city: city,
       college: college,
-      date_of_birth: dob,
+      date_of_birth: date_of_birth,
     });
     const data = await user.save();
 

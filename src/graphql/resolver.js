@@ -19,6 +19,7 @@ const users = (userIds) => {
           _id: user.id,
           createdEvents: events.bind(this, user._doc.createdEvents),
           bookedEvents: events.bind(this, bookeduserid),
+          date_of_birth: user._doc.date_of_birth.toISOString().slice(0, 10),
         };
       });
     })
@@ -33,7 +34,7 @@ const userbookedEvents = async (userId) => {
     const bookedEvents = user.bookedEvents;
     return bookedEvents.map(async (object) => {
       const event = await Event.findById(object.event);
-      const bookingTime = object.bookingTime;
+      const bookingTime = object.bookingTime.toISOString().slice(0, 10);
       const paymentId = object.paymentId;
 
       const data = {
