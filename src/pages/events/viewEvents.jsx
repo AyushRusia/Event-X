@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       marginLeft: theme.spacing(5),
-      marginTop: "20px",
+      marginTop: "0px",
       [theme.breakpoints.up("md")]: {
         marginLeft: theme.spacing(14),
       },
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) =>
     },
     workarea: {
       //border: "solid 3px black",
-      marginTop: "60px",
+      marginTop: "20px",
     },
     heading: {
       margin: "auto",

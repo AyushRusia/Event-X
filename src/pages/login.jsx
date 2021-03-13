@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) =>
       marginTop: "10px",
       textAlign: "justify",
       marginBottom: "8px",
-      fontFamily: "Raleway",
+      fontFamily: "serif",
       color: "#000",
       fontWeight: "700",
     },
@@ -51,13 +51,13 @@ export default function Login() {
             </Typography>
             <Typography
               variant="h6"
-              fontFamily="Raleway"
+              fontFamily="serif"
               component="p"
               className={classes.subtitle}
             >
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
+              Register yourself in EventX then you can online create Event's
+              Booking System then sit back and relax we will take payments on
+              behalf of you provide all the necessary details of clients.
             </Typography>
           </Box>
           <Box>

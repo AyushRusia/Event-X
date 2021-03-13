@@ -15,7 +15,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
@@ -23,6 +22,10 @@ import axios from "axios";
 import AuthContext from "../../context/auth";
 import Snackbar from "../../context/snackbar";
 import list from "./list";
+import ViewComfyIcon from "@material-ui/icons/ViewComfy";
+import CreateIcon from "@material-ui/icons/Create";
+import PersonIcon from "@material-ui/icons/Person";
+import DoneIcon from "@material-ui/icons/Done";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -178,7 +181,15 @@ export default function MiniDrawer() {
                   history.push(object.path);
                 }}
               >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index == 0 ? (
+                  <ViewComfyIcon />
+                ) : index == 1 ? (
+                  <CreateIcon />
+                ) : index == 2 ? (
+                  <DoneIcon />
+                ) : (
+                  <MailIcon />
+                )}
               </ListItemIcon>
               <ListItemText primary={object.name} />
             </ListItem>
@@ -197,7 +208,7 @@ export default function MiniDrawer() {
                 history.push("/profile");
               }}
             >
-              <InboxIcon />
+              <PersonIcon />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>

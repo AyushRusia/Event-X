@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontFamily: "Helvetica ",
+    color: "black",
+    fontWeight: "700",
   },
   btn: {
     marginRight: theme.spacing(3),
@@ -29,7 +32,7 @@ export default function ButtonAppBar(props) {
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Event Registration Portal
+            EventX
           </Typography>
 
           <Button
