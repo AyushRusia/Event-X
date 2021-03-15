@@ -188,6 +188,9 @@ export default function LoginForm(props) {
                 </Grid>
               </Form>
             </Formik>
+            <Typography style={{ textAlign: "center", marginTop: "5px" }}>
+              copyright : AyushRusia
+            </Typography>
           </Box>
         </Grid>
       </div>
