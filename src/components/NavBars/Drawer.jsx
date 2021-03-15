@@ -181,11 +181,11 @@ export default function MiniDrawer() {
                   history.push(object.path);
                 }}
               >
-                {index == 0 ? (
+                {index === 0 ? (
                   <ViewComfyIcon />
-                ) : index == 1 ? (
+                ) : index === 1 ? (
                   <CreateIcon />
-                ) : index == 2 ? (
+                ) : index === 2 ? (
                   <DoneIcon />
                 ) : (
                   <MailIcon />

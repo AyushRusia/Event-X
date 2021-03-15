@@ -11,6 +11,8 @@ import IconButton from "@material-ui/core/IconButton";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Snackbar from "../../context/snackbar";
+import AuthContext from "../../context/auth";
+
 const cities = ["Bhopal", "Jabalpur", "Gwalior"];
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -56,6 +58,7 @@ export default function NewForm(props) {
 
   const classes = useStyles();
   const history = useHistory();
+  const Context = useContext(AuthContext);
   const Context2 = useContext(Snackbar);
   const [showPassword, setShowPassword] = React.useState(false);
   const handleCity = (values, setValues, newValue) => {
@@ -124,8 +127,11 @@ export default function NewForm(props) {
         }
       );
       await axios.get("http://localhost:8000/auth/logout");
-      Context2.openbarfun("success", "Profile Updated ,Login Again");
-      history.push("/");
+      if (response.data.data.updateProfile) {
+        Context2.openbarfun("success", "Profile Updated Login Again");
+        await Context.getLoggedIn();
+        history.push("/");
+      }
     } catch (error) {
       console.log(error.response.data);
       Context2.openbarfun("error", "Something Went Wrong");
