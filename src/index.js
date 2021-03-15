@@ -1,3 +1,5 @@
+require("babel-core/register");
+require("babel-polyfill");
 import express from "express";
 const app = express();
 import mongoose from "mongoose";
@@ -14,7 +16,7 @@ dotenv.config();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: [`${process.env.HOST}`],
     credentials: true,
   })
 );
@@ -35,8 +37,8 @@ app.use("/graphql", async (req, res, next) => {
     rootValue: resolvers,
   })(req, res);
 });
-app.listen(process.env.PORT, () =>
-  console.log(`Server Running On port ${process.env.PORT}`)
+app.listen(process.env.PORT || 8000, () =>
+  console.log(`Server Running On port ${process.env.PORT || 8000}`)
 );
 
 mongoose

@@ -1,6 +1,6 @@
-import Event from "../../../models/event";
-import User from "../../../models/user";
-import Payment from "../../../models/payment";
+import Event from "../../models/event";
+import User from "../../models/user";
+import Payment from "../../models/payment";
 import { users, events, userbookedEvents } from "../resolver";
 
 const queries = {

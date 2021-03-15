@@ -1,5 +1,5 @@
-import Event from "../../models/event";
-import User from "../../models/user";
+import Event from "../models/event";
+import User from "../models/user";
 import bcrypt from "bcryptjs";
 import mutations from "../graphql/resolvers/mutation";
 import queries from "../graphql/resolvers/query";
