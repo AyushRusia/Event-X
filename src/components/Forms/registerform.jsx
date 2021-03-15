@@ -79,6 +79,7 @@ export default function RegisterForm() {
       .required("Email can't be Empty"),
     phone: yup.string().required("Phone Number is Required"),
     password: yup.string().required("Password is Required"),
+    date_of_birth: yup.string().required("Required"),
   });
   const handleCity = (values, setValues, newValue) => {
     setValues({
