@@ -13,7 +13,7 @@ function AuthContextProvider(props) {
   async function getLoggedIn() {
     try {
       const LoggedInData = await axios.get(
-        "http://localhost:8000/auth/isLoggedIn"
+        "https://eventxserver.herokuapp.com/auth/isLoggedIn"
       );
 
       setAuthdata(LoggedInData.data);

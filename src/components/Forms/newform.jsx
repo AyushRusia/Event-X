@@ -116,7 +116,7 @@ export default function NewForm(props) {
     }`;
       setupdatefalse();
       const response = await axios.post(
-        "http://localhost:8000/graphql",
+        "https://eventxserver.herokuapp.com/graphql",
         {
           query: body,
         },
@@ -126,7 +126,7 @@ export default function NewForm(props) {
           },
         }
       );
-      await axios.get("http://localhost:8000/auth/logout");
+      await axios.get("https://eventxserver.herokuapp.com/auth/logout");
       if (response.data.data.updateProfile) {
         Context2.openbarfun("success", "Profile Updated Login Again");
         await Context.getLoggedIn();

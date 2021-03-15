@@ -88,9 +88,12 @@ export default function RegisterForm() {
   };
   const submitHandler = async (values) => {
     try {
-      const response = await axios.post("http://localhost:8000/auth/register", {
-        ...values,
-      });
+      const response = await axios.post(
+        "https://eventxserver.herokuapp.com/auth/register",
+        {
+          ...values,
+        }
+      );
       if (response.data.email)
         Context2.openbarfun("success", " Registered Successfully");
 

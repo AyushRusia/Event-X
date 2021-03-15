@@ -52,7 +52,7 @@ const fetchEvents = async () => {
                     }
                   }`;
     const events = await axios.post(
-      "http://localhost:8000/graphql",
+      "https://eventxserver.herokuapp.com/graphql",
       {
         query: body,
       },

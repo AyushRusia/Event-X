@@ -31,7 +31,7 @@ export default function PaymentDialog(props) {
                           }`;
       setPending(true);
       const payorder = await axios.post(
-        "http://localhost:8000/graphql",
+        "https://eventxserver.herokuapp.com/graphql",
         { query: body1 },
         {
           headers: { "Content-Type": "application/json" },
@@ -54,7 +54,7 @@ export default function PaymentDialog(props) {
   }
 }`;
       const response = await axios.post(
-        "http://localhost:8000/graphql",
+        "https://eventxserver.herokuapp.com/graphql",
         {
           query: body2,
         },

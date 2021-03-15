@@ -112,7 +112,9 @@ export default function MiniDrawer() {
   const history = useHistory();
 
   async function Logout() {
-    const logout = await axios.get("http://localhost:8000/auth/logout");
+    const logout = await axios.get(
+      "https://eventxserver.herokuapp.com/auth/logout"
+    );
     Context2.openbarfun("info", logout.data);
     console.log(logout);
     await Context.getLoggedIn();

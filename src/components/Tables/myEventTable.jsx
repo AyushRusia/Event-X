@@ -31,7 +31,7 @@ const getClients = async (EventId) => {
                    }
                   }`;
     const response = await axios.post(
-      "http://localhost:8000/graphql",
+      "https://eventxserver.herokuapp.com/graphql",
       {
         query: body,
       },

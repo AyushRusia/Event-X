@@ -87,17 +87,20 @@ export default function LoginForm(props) {
 
   const submitHandler = async (values) => {
     try {
-      const response = await axios.post("http://localhost:8000/auth/login", {
-        ...values,
-      });
+      const response = await axios.post(
+        "https://eventxserver.herokuapp.com/auth/login",
+        {
+          ...values,
+        }
+      );
       console.log(response);
       await Context.getLoggedIn();
       Context2.openbarfun("success", "User Logged In");
       history.push("/event");
     } catch (error) {
-      if (error.response.data.error)
-        Context2.openbarfun("error", error.response.data.error);
-      else Context2.openbarfun("error", "Something Went Worng");
+      //if (error.response.data.error)
+      // Context2.openbarfun("error", error.response.data.error);
+      Context2.openbarfun("error", "Something Went Worng");
     }
   };
 
